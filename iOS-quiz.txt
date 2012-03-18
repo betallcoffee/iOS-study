@@ -22,4 +22,5 @@ It's quite common to see a class extension at the top of a .m file declaring mro
 
 In Class-Extension you're able to overwrite properties from a (public) read-only property to be internally readwrite. And since LLVM 1.5 you're able to do even more: you can now declare instance variable in a class extension so they are gone from the regular interface.
 
+referenceURL:stackoverflow.com/questions/3499704/difference-between-categoryand-class-extension
 
