@@ -1,0 +1,25 @@
+1.Difference Between shallow copy and deep copy?
+answer:
+Shallow copies duplicate as little as possible. A shallow copy of a collection si a copy of the collection structure, not the elements. With a shallow copy, two collections now share the individual elements.
+
+Deep copies duplicate everything. A deep copy of a collection is two collections with all of the elements in the original collection duplicated.
+
+referenceURL:stackoverflow.com/questions/184710/what-is-the-difference-between-a-deep-copy-and-a-shallow-copy
+
+2.What is advantage of categories? What is difference between implementing a category and inheritance?
+answer:
+A category is a way to add methods to existing classes. They usually reside in files called "Class+CategoryName.h", like "NSView+CustomAdditions.h" (and .m, of course).
+
+A class extension is a category, except for 2 main difference:
+  1. The category has no name. It is declared like this;
+    @interface someClass()
+    - (void) anadditionalMethod;
+    @end
+
+  2. The implementation of the extension must be in the main @implementation block of the file.
+
+It's quite common to see a class extension at the top of a .m file declaring mroe methods on the class, that are then implemented below in the main @implementation section of the class. This is a way to declare "pseudo-private" methods (pseudo-private in that they're not really private, just not externally exposed).
+
+In Class-Extension you're able to overwrite properties from a (public) read-only property to be internally readwrite. And since LLVM 1.5 you're able to do even more: you can now declare instance variable in a class extension so they are gone from the regular interface.
+
+
