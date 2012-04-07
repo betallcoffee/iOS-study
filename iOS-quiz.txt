@@ -52,3 +52,51 @@ They Look Similar, But Are Different
 The confusion lies in the idea that a class extension is just an "unnamed category". The syntax is similar and implies this idea; I imagine it was just chosen because it was familiar to Objective-C programmers and, in some ways, class extensions are like categories. They are alike in that both features allow you to add methods (and properties) to an existing class, but they serve different purposes and thus allow different behaviors.
 
 referenceURL:stackoverflow.com/questions/465679/minutia-on-objective-c-categories-and-extensions
+
+4. Difference between protocol in objective-c and interface in java.
+First off, a little historical perspective on the topic, from one of the creators of Java. Next, Wikipedia has a moderately helpful section on Objective-C protocols. In particular, understand that Objective-c supports both formal protocols (which  are explicitly declared with the @protocol keyword, the equivalent of a Java interface) and informal protocols (just one or more methods implemented by a class, which can be discoverd via reflection).
+
+If you adopt a formal protocol (Objectvie-C terminology for "implement an interface") the compiler will emit warnings for unimplemented methdos. Just as you would expect in Java. Unlike Java (as skaffman mentioned), if an Objective-C class implements the methods contained in a formal protocol, it is said to "conform" to that protocol, even if its interface doesn't explicitly adopt it. You can test protocol conformance in code (using -conformsToProtocol:) like this:
+    if ([myObject conformsToProtocol:@protocol(MyProtocol)]) {
+    }
+ 
+As of Objective-C 2.0 (in OS X 10.5 "Leopard" and iOS), formal protocols can now define optional methods, and a class conforms to a protocol as long as it implements all the required methods. You can use the @required (default) and @optional keywords to toggle whether the method declarations that follow must or may be implemented to conform to the protocol. (See the section of Apple's Objective-C 2.0 Programming Language guide that discusses optional protocol methods)
+
+Optional protocol methods open up a lot of flexibility to developers, particularly for implementing delegates and listeners. Instead of extending something like a MouseputAdapter (which can be annoying, since Java is also single-inheritance) or implementing a lot of pointless, empty mehtonds, you can adopt a protocol and implement only the optional methods you care about. With this pattern, the caller checks whether the methods is implemented before invoking it (using -respondsToSelector) like so:
+    if ([myObject respondsToSelector:@selector(fillArray:withObject:)]) {
+        [myObject fillArray:anArray withObject:foo];
+    }
+
+if the overhead of reflectino becomes a problem, you can always cache the boolean result for resue, but resist the urge to optimize prematurely.
+
+They are almost identical. However the one thing that has caught me out, is that unelss you explicily declare that an Objective-C protocol also implements NSObject, references to that protocol don't get access to the methods that NSObject declares (without a compiler warning anyway). With java you can have a reference to an interface, and still call toString() etc on it.
+eg:
+    Objective-C:
+    @protocol MyProtocol
+    // Protocol definition
+    @end
+
+    id <MyProtocol> myProtocol;
+
+    [myProtocol retain] // Compiler warning
+
+    Java:
+    public interface MyInterface {
+    // intterface definition
+    }
+
+    MyInterface myInterface;
+
+    myInterface.toString(); // Works fine.
+
+    Objective-C (fixed):
+    @protocol MyProtocol <NSObject>
+    // Protocol definition
+    @end
+
+    id <MyProtocol> myProtocol;
+
+    [myProtocol retain] // No Warning
+
+referenceURL:stackoverflow.com/questions/990360/differences-between-java-interfaces-and-objective-c-protocols
+
