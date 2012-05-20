@@ -100,3 +100,44 @@ eg:
 
 referenceURL:stackoverflow.com/questions/990360/differences-between-java-interfaces-and-objective-c-protocols
 
+5. What are KVO and KVC?
+KVC is a way to call property accessor methods, or otherwise access a property, using string identifiers.
+
+What do I mean by "otherwise access"? For KVC purposes, an instance variable with no accessor methods counts as an informal property. It'll get or set the value of the instance variable directly if no matching accessor pair can be found. (Yes, this is not worth using in modern code. Always declare an @property for anything you intend to access elsewhere, and, inversely, don't use KVC to access anything that isn't a public property.)
+
+Property accessor methods are what KVC will call if they exist (preferred, both by KVC and by every sane programmer, over direct ivar access). An accessor may get or set an instance variable, as synthesized accessors do, or access some other storage.
+
+Accessors are implementation, properties are interface, and KVC is one way to use them.
+
+And how do I distinguish between dots that call setValue:forKeyPath: and simple accessors?
+
+A key path is a string, whereas a property-access expression is an expression. The compiler evaluates a property-access expression and translates it into one or more Objective-C messages, whereas a key path is evaluated by KVC at run time.
+
+So, when you use a key path:
+[someObject setValue:theValue forKeyPath:@"foo.bar.baz"];
+
+You know it's a key path because (1) it's a string, as indicated in this case by the string-iteral syntax @"...", and (2) you're passing the key path string to setValue:forKeyPath: for it to evaluate.
+
+Using a key path is using KVC to access the named properties. It will send any relevant accessor messages on your behalf.
+
+When you use a property-access expression:
+someOject.foo.bar.baz = theValue;
+You know it's a property access expression because you are not identifying the properties with a string. You are accessing them yourself, in your own code.
+
+There isn't much reason to use KVC in any form; when you know the property at authorship/compile time, it's best to have an @property declared and to access the property yourself, whether with property access expressions or message expressions. The time to use KVC is when you don't know what property you want to access until run time, which is pretty rare. It's mainly a building-block technology behind KVO. Cocoa Bindings, parts of Core Animation, etc.
+
+How you make a property KVC compliant depends on whether that property is an attribute, a to-one relationship, or a to-many relationship. For attribute and to-one relationship, a class must implement at least one of the follwing in the given order of preference(key refers to the property key)
+    The class has a declared property with the name key.
+    It implements accessor methods named key and, if the property is mutable, setKey:. (If the property is a Boolean attribute, the getter accessor method has the form isKey.)
+    It declares an instance variable of the form key or _key.
+Implementing KVC compliant for a to-many relationship is a more complicated procedure.
+
+Key-value observing is a mechanism that allows objects to be notified of changes to specified properties of other objects
+It is particularly useful for communication between model and controller layers in an application.
+You can observe properties including simple attributes, to-one relationships, and to-many relationships. Observers of to-many relationships are informed of the type of change made--as well as which objects are involved in the change.
+    Observing Object must register as an observer of the Observered Object's property by sending an addObserver:forKeyPath:options:context: message.
+    In order to respond to change notifications, the observer must implement the observeValueForKeyPath:ofObject:change:context: method. This method implementation defines how the observer responds to change notifications. It is in this method that you can customize your response to a change in one of the observed properties. 
+    The observeValueForKeyPath:ofObject:change:context: method is automatically invoked when the value of an observed property is changed in a KVO-compliant manner, or if a key upon which it depends is changed.
+referenceURL:stackoverflow.com/questions/8191373/whats-the-difference-between-kev-and-properties
+
+
