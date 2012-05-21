@@ -138,6 +138,18 @@ You can observe properties including simple attributes, to-one relationships, an
     Observing Object must register as an observer of the Observered Object's property by sending an addObserver:forKeyPath:options:context: message.
     In order to respond to change notifications, the observer must implement the observeValueForKeyPath:ofObject:change:context: method. This method implementation defines how the observer responds to change notifications. It is in this method that you can customize your response to a change in one of the observed properties. 
     The observeValueForKeyPath:ofObject:change:context: method is automatically invoked when the value of an observed property is changed in a KVO-compliant manner, or if a key upon which it depends is changed.
+
 referenceURL:stackoverflow.com/questions/8191373/whats-the-difference-between-kev-and-properties
 
 
+6. What is purpose of delegates?
+When an object receives a request, the object can either handle the request or pass the request on to a second object to do the work.
+If the objects decides to pass the request on, you say that the object has forwarded responsibility for handing the requests to the second object.
+
+The delegate pattern is used to have someone else actually do the work.
+    when you want to perform some additional actions before/after your delegate 
+    when you have imcompatible interfaces and you want to adapt one to the other.
+You get the original object and delegate to it from methods that conform to the desired interface.
+    when you want to hide some complexity from the user of your class, you can have methods that delegate to different actual works. 
+For example, a Car can have start(), openWindow() and brake(), but each of these methods will actually delegate to the engine, windows and braking system.
+referenceURL:stackoverflow.com/questions/7168714/what-is-the-purpose-of-a-delegation-pattern
