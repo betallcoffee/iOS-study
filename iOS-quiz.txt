@@ -153,3 +153,10 @@ You get the original object and delegate to it from methods that conform to the 
     when you want to hide some complexity from the user of your class, you can have methods that delegate to different actual works. 
 For example, a Car can have start(), openWindow() and brake(), but each of these methods will actually delegate to the engine, windows and braking system.
 referenceURL:stackoverflow.com/questions/7168714/what-is-the-purpose-of-a-delegation-pattern
+
+7. What are mutable and immutable types in objective c?
+A mutable object can be mutated or changed. An immutable object cannot.
+The advantages of your mutable objects is obvious, but they should only be used when necessary (which is a lot less often than you think) as they take up more memory than immutable objects.
+
+referenceURL:stackoverflow.com/questions/7071096/what-is-difference-between-mutable-and-immutable.
+
