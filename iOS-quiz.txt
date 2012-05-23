@@ -160,3 +160,12 @@ The advantages of your mutable objects is obvious, but they should only be used 
 
 referenceURL:stackoverflow.com/questions/7071096/what-is-difference-between-mutable-and-immutable.
 
+8. When we call objective-C is runtime language what does it mean?
+
+9. What is difference between NSNotification and delegate ?
+Cocoa has provided an Observer Pattern in the Cocoa Library called the NSNotificationCenter.
+The basic idea is that a listener registers with a broadcaster using some predefined protocol.
+At some later point, the broadcaster is told to notify all of its listeners, where it calls somce function on each of its listeners and passes certain arguments along.
+This allows for asynchronous message passing between two different objects that don't have to know about one-another , they just have to know about the broadcaster.
+
+The Application Delegate is an object which receives notifications when the UIApplication object reaches certain states. In many respects, it is a specialized one to one observer pattern and synchronous message.
