@@ -169,3 +169,11 @@ At some later point, the broadcaster is told to notify all of its listeners, whe
 This allows for asynchronous message passing between two different objects that don't have to know about one-another , they just have to know about the broadcaster.
 
 The Application Delegate is an object which receives notifications when the UIApplication object reaches certain states. In many respects, it is a specialized one to one observer pattern and synchronous message.
+
+10. What is push notification?
+What if a application is not connected to its provider or even running on the device or computer 
+when the provider has new data for it to download? How does it learn about this waiting data?
+Push notifications are the solution to this dilemma. A push notification is a short message that a provider has delivered to the operating systerm of a device or compute,
+the operating systerm, in turn, informs the user of a client application that there is data to be downloaded, a message to be viewed, and so on.
+If the user enables this feature and the application is properly registered the notification is delivered to the operating systerm and possibly to the application.
+Apple Push Notification service is the primary technology for the push-notification feature.
