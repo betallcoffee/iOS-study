@@ -177,3 +177,11 @@ Push notifications are the solution to this dilemma. A push notification is a sh
 the operating systerm, in turn, informs the user of a client application that there is data to be downloaded, a message to be viewed, and so on.
 If the user enables this feature and the application is properly registered the notification is delivered to the operating systerm and possibly to the application.
 Apple Push Notification service is the primary technology for the push-notification feature.
+
+11. Polymorphism in Objective-C.
+There are some different kinds class, but all inheriting from the same base class. 
+Examples, the base class is Vehicle, and the subclasses are Car, Train, and Plane. Vehicle have a method - (void)drive. 
+all the subclasses override the method. Then there's a variable _pointer which type is (Vehicle *) and it points to a instance of class Car.
+When calling [_pointer drive] will invoke the class Car's method.
+In Objective-C messages are handled dynamically, which gives an equivalent to C++ virtual methods.
+
