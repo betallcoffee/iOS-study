@@ -185,3 +185,12 @@ all the subclasses override the method. Then there's a variable _pointer which t
 When calling [_pointer drive] will invoke the class Car's method.
 In Objective-C messages are handled dynamically, which gives an equivalent to C++ virtual methods.
 
+12. Singleton?
+The Singleton pattern is almost the simplest form of design pattern erver.
+The intent of the pattern is to make an object of a class be the sole instance in a system.
+To achieve that, we can begin with the point where clients instantiate it.
+So we need to "block" every access to create the object with a mechanism that allows only a single instance of the object's class to go out.
+We can use a factory method to bottleneck the instantiation process.
+That method should be a static method (class method),
+as it wouldn't make sense to allow an instance of the class to create another sole instance.
+
