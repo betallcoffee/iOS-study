@@ -194,3 +194,16 @@ We can use a factory method to bottleneck the instantiation process.
 That method should be a static method (class method),
 as it wouldn't make sense to allow an instance of the class to create another sole instance.
 
+13. What is responder chain?
+If the first responder [to an event or action message] cannot handle an event or action message,
+it forwards it to the "next responder" in a linked series called the repsonder chain.
+The responder chain allows repsonder objects to transfer responsibility for handing an event or action message to other objects in the application.
+If an object in the responder chain cannot handle the event or action, it resends the message to the next responder in the chain.
+The message travels up the chain, toward higher-level objects, until it is handled.
+If it isn't handled, the application discards it.
+The First Responder is a very specific concept in Cocoa. The only time iOS decides to set the First Responder is when a text field gets focus.
+At all other times you must explicitly control which object you want to be the first responder (see -canBecomeFirstResonder, -becomeFirstResponder).
+There is no such thing as a second responder.
+There is a default chain which can be view->superview->supreview but might also include UIViewControllers, UIWindows, UIWindowControllers, UIApplication and more, so it heavily depends on your object hierarchy (not just your view hierarchy, so you can't say nextResponder is always the parent view).
+On OS X 10.6 the default chain is even different for different types of events and actions and can even include your app delegate, which may or may not be a responder, I'm not sure if this is the case in iOS.
+After you have managed the First Responder it is down to you to insert, remove and append items to it's responder chain to achieve your desired aim.
