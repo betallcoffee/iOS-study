@@ -207,3 +207,12 @@ There is no such thing as a second responder.
 There is a default chain which can be view->superview->supreview but might also include UIViewControllers, UIWindows, UIWindowControllers, UIApplication and more, so it heavily depends on your object hierarchy (not just your view hierarchy, so you can't say nextResponder is always the parent view).
 On OS X 10.6 the default chain is even different for different types of events and actions and can even include your app delegate, which may or may not be a responder, I'm not sure if this is the case in iOS.
 After you have managed the First Responder it is down to you to insert, remove and append items to it's responder chain to achieve your desired aim.
+
+14. Difference between frame and bounds?
+The bounds of an UIView is the rectangle, expressed as a location(x,y) and size (width, height) relative to its own coordinate system(0,0).
+The frame of an UIView is the rectangle, expressed as a location(x,y) and size(width, height) relative to the superview it is contained within.
+So, we can see that in both cases, the width and the height of the view is the same regardless of whether we are looking at the bounds or frame.
+What is different is the x,y positioning of the view. By default, the origin of the bounds rectangle is set to (0,0),
+but you can change this value to display different portions of the view.
+The size of the bounds rectangle is couple to the size of the frame rectangle,
+so that changes to one affect the other.
