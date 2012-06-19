@@ -170,6 +170,8 @@ This allows for asynchronous message passing between two different objects that 
 
 The Application Delegate is an object which receives notifications when the UIApplication object reaches certain states. In many respects, it is a specialized one to one observer pattern and synchronous message.
 
+referenceURL:stackoverflow.com/questions/1900352/what-is-nsnotification
+
 10. What is push notification?
 What if a application is not connected to its provider or even running on the device or computer 
 when the provider has new data for it to download? How does it learn about this waiting data?
@@ -177,6 +179,8 @@ Push notifications are the solution to this dilemma. A push notification is a sh
 the operating systerm, in turn, informs the user of a client application that there is data to be downloaded, a message to be viewed, and so on.
 If the user enables this feature and the application is properly registered the notification is delivered to the operating systerm and possibly to the application.
 Apple Push Notification service is the primary technology for the push-notification feature.
+
+referenceURL:stackoverflow.com/questions/2558645/push-notification-in-iphone-application
 
 11. Polymorphism in Objective-C.
 There are some different kinds class, but all inheriting from the same base class. 
@@ -208,6 +212,8 @@ There is a default chain which can be view->superview->supreview but might also 
 On OS X 10.6 the default chain is even different for different types of events and actions and can even include your app delegate, which may or may not be a responder, I'm not sure if this is the case in iOS.
 After you have managed the First Responder it is down to you to insert, remove and append items to it's responder chain to achieve your desired aim.
 
+referenceURL:stackoverflow.com/questions/3768851/what-is-responder-chain-in-iphone-sdk-how-it-works
+
 14. Difference between frame and bounds?
 The bounds of an UIView is the rectangle, expressed as a location(x,y) and size (width, height) relative to its own coordinate system(0,0).
 The frame of an UIView is the rectangle, expressed as a location(x,y) and size(width, height) relative to the superview it is contained within.
@@ -216,3 +222,33 @@ What is different is the x,y positioning of the view. By default, the origin of 
 but you can change this value to display different portions of the view.
 The size of the bounds rectangle is couple to the size of the frame rectangle,
 so that changes to one affect the other.
+referenceURL:stackoverflow.com/questions/1210047/iphone-development-whats-the-difference-between-the-frames-and-the-bounds
+
+15.Difference between method and selector?
+For efficiency, full ASCII names are not used as method selectors in compiled code.
+Instead, the compiler writes each methode name into a table, then pairs the name with a unique identifier that represents the method at runtime.
+The runtime system makes sure each identifier is unique.
+No two selectors are the same, and all methods with the same name have the same selector.
+
+Compiled selectors are assigned to a special type, SEL, to distinguish them from other data.
+Valid selectors are never 0. You must let the system assign SEL identifiers to methods;
+it's futile to assign them arbitrarily.
+The @selector() directive lets you refer to the compiled selector, rather than to the full method name.
+In some cases, you may need to convert a character string to a selector at runtime. You can do this with the NSSelectorFromString function.
+Conversion in the opposite direction is also possible. The NSStringFromSelector function return a method name of a selector.
+
+Compiled selectors identify method names, not method implementations.
+The display method for one class, for example, has the same selector as display methods defined in other classes.
+This is essential for polymorphism and dynamic binding; it lets you send the same message to receivers belonging to different classes.
+If there were one selector per method implementation, a message would be no different from a function call.
+A class method and an instance method with the same anme are assigned the same selector. However, because of their separate domains, there's no confusion between the two.
+A class could define a display class method in addition to a dispaly instance method.
+
+The messaging routine has accessto method implementations only through selectors, so it treats all methods with the same selector alike.
+It discovers the return type of a method, and the data types of its parameters, from the selector.
+Therefore, except for messages sent to statically typed receivers, dynamic binding requires all implementations of identically named methods to have the same retrun type and the same parameter types.
+(Statically typed receivers are an exception to this rule because the compiler can learn about the method implementation from the class type.)
+
+Although identically named class methods and instance methods are represented by the same selector, they can have different parameter types and return types.
+referenceURL:stackoverflow.com/questions/5608476/whats-the-difference-between-a-method-and-a-selector.
+
