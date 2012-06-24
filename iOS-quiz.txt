@@ -252,3 +252,16 @@ Therefore, except for messages sent to statically typed receivers, dynamic bindi
 Although identically named class methods and instance methods are represented by the same selector, they can have different parameter types and return types.
 referenceURL:stackoverflow.com/questions/5608476/whats-the-difference-between-a-method-and-a-selector.
 
+16. NSOperation ?
+The NSOoperation class is an abstract class you use to encapsulate the code and data associated with a single task.
+Because it is abstract, you do not use this class directly but instead subclass or use one of the system-defined subclasses (NSInvocationOperation or NSBlockOperation) to perform the actual task.
+Despite being abstract, the base implementation of NSOperation does include significant logic to coordinate the safe execution of your task.
+The presence of this built-in logic allows you to focus on the actual implementation of your task, rather than on the glue code needed to ensure it works correctly with other system objects.
+An operation object is a single-shot object-that is, it executes its task once and cannot be used to execute it again.
+You typically execute operations by adding them to an operation queue (an instance of the NSOperationQueue class).
+An operation queue executes its operation either directly, by running them on secondy threads, or indirectly using the libdispatch library (also known as Grand Central Dispatch).
+If you do not want to use an operation queue, you can execute an operation yourself by calling its start method directly from you code.
+Executing operations manually does not put more of a burden on your code, because starting an operation that is not in the ready state triggers an exception.
+The isReady method reports on the operation's readiness.
+
+
