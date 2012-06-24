@@ -264,4 +264,6 @@ If you do not want to use an operation queue, you can execute an operation yours
 Executing operations manually does not put more of a burden on your code, because starting an operation that is not in the ready state triggers an exception.
 The isReady method reports on the operation's readiness.
 
-
+17. What is lazy load?
+Don't load anything untill you have to load something. Then, when you have to load it.
+Such as lazy of loading of NIB files (loading them into memory only when they're needed).
