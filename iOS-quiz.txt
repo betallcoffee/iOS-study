@@ -267,3 +267,23 @@ The isReady method reports on the operation's readiness.
 17. What is lazy load?
 Don't load anything untill you have to load something. Then, when you have to load it.
 Such as lazy of loading of NIB files (loading them into memory only when they're needed).
+
+18. Can we use tableview controolers on one viewController?
+YES.
+
+19. Can we use one tableivew with two different datasources? How you will achieve this?
+NO.
+
+20. What is advantage of using RESTful webservices?
+
+21. What is the difference between RESTful and SOAP?
+
+22. When to use NSMutableArry and when to use NSArray?
+NSMutableArray is primarily used for when you are building collections and u want to modify them.
+NSArray is used for read only inform and either:
+  used to populate an NSMutableArray, to perform modifications.
+  used to temporarily store data that is no meant to be edited.
+ 
+NSMutableArray is not threadsafe, while NSArray is.
+NSMutbaleArray and NSArray both are build on CFArray, performance/complexity should be same.
+There is difference how much memory the two objects would use NSArray has a fixed limit, while NSMutableArray can use up as much space as you have free.
