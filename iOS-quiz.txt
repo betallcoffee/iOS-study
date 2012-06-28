@@ -287,3 +287,14 @@ NSArray is used for read only inform and either:
 NSMutableArray is not threadsafe, while NSArray is.
 NSMutbaleArray and NSArray both are build on CFArray, performance/complexity should be same.
 There is difference how much memory the two objects would use NSArray has a fixed limit, while NSMutableArray can use up as much space as you have free.
+
+23. How many autorelease you can create in your application? Is there any limit?
+It's not "memory intensive" at all. If you allocate and autorelease a very large number of objects, such as in a loop,
+or a smaller number of large objects, you could run into problems.
+But autorelease just delays the release of objects that you're creating anyway,
+and which may or may not even be deallocated when the release does happen (the autoreleased objects may also be retained by other objects).
+If you can release an object immediately, do that. If you need to autorelease, then do that and don't worry about the memory.
+If you're creating lots of objects in each iteration of a loop, you might want to consider either using your own autorelease pool or creating said objects with alloc/init so that you can release them immediately.
+If a method had to release every object that it created before returning,
+there'd be no way to return an object without requiring the caller to release ther returned object.
+Autorelease allows a method to create an object and release it, but to defer that release until the caller has had a chance to use and possibly retain the returned object.
