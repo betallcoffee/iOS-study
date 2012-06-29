@@ -298,3 +298,11 @@ If you're creating lots of objects in each iteration of a loop, you might want t
 If a method had to release every object that it created before returning,
 there'd be no way to return an object without requiring the caller to release ther returned object.
 Autorelease allows a method to create an object and release it, but to defer that release until the caller has had a chance to use and possibly retain the returned object.
+
+24. When retain count increase?
+You want to own the reference, so you will retain the reference, then the retain cout increase.
+
+25. Difference between copy and assign in objective-c?
+If use copy, you will get a new reference to a new memory what has the same content to the old. But assign not.
+If you will change the content of the reference, but cann't change the content of the old. you must use copy.
+If not, and you needn't own the reference, you can use assign.
