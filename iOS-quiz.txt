@@ -306,3 +306,18 @@ You want to own the reference, so you will retain the reference, then the retain
 If use copy, you will get a new reference to a new memory what has the same content to the old. But assign not.
 If you will change the content of the reference, but cann't change the content of the old. you must use copy.
 If not, and you needn't own the reference, you can use assign.
+
+26. What are commonly used NSObject class methods?
+alloc, init, copy, retain, release, autorelease.
+
+27. What is the definition of convenience constructor?
+What you are talking about is actually more specifically a "convenience constructor" in Objective-C.
+(Note that it's not really a constructor in the C++/JAVA/C# sense, it's actually an object initialize/factory method,
+but it seems to be the convention to call the "convenience constructor").
+"Convenience constructors" in Objective-c are a convention or pattern for creating a constructor/initialize/factory method for a class which takes specific parameters.
+This pattern also has some special conventions that you should follow (such as autoreleasing the new object within the constructor). 
+So that your custom class fit in well with the built-in types.
+As for "convenience method" this specific term doesn't have any special meaning in Objective-C.
+You can create any type of convenience method in Objective-C, 
+and there is no expection about what it should or should not do.
+It's only "convenience constructor" that has a special meaning.
